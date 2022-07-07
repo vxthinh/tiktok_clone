@@ -1,6 +1,8 @@
 import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+import { Link, Router } from 'react-router-dom';
+import routesConfig from '~/config/routes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleQuestion,
@@ -98,7 +100,9 @@ function Header() {
   return (
     <header className={cx('wrapper')}>
       <div className={cx('inner')}>
-        <img src={logo} alt="Tiktok" />
+        <Link to={routesConfig.home} className={cx('logo-link')}>
+          <img src={logo} alt="Tiktok" />
+        </Link>
 
         {/* Search */}
         <Search />
@@ -116,10 +120,10 @@ function Header() {
                   <MessageIcon />
                 </button>
               </Tippy>
-              <Tippy elay={[0, 200]} content="Inbox" placement="bottom">
+              <Tippy delay={[0, 50]} content="Inbox" placement="bottom">
                 <button className={cx('action-btn')}>
                   <InboxIcon />
-                  {/* <span className={cx('badge')}>12</span> */}
+                  <span className={cx('badge')}>12</span>
                 </button>
               </Tippy>
             </>

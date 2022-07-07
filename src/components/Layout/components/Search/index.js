@@ -9,6 +9,7 @@ import AccountItem from '~/components/AccountItem';
 import { SearchIcon } from '~/components/Icons';
 import { useDebounce } from '~/hook';
 import styles from './Search.module.scss';
+import * as searchServices from '~/apiServices/searchServices';
 
 const cx = classNames.bind(styles);
 
@@ -21,7 +22,6 @@ function Search() {
 
   //Custom hook
   const debounced = useDebounce(searchValue, 500);
-  console.log(debounced);
   //REF
   const inputRef = useRef();
 
@@ -31,21 +31,37 @@ function Search() {
       return;
     }
 
-    setLoading(true);
+    // fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
+    //   .then((res) => res.json())
+    //   .then((res) => {
+    //     setSearchResult(res.data);
+    //     setLoading(false);
+    //   })
 
-    fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
-      .then((res) => res.json())
-      .then((res) => {
-        setSearchResult(res.data);
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-      });
+    const fetchApi = async () => {
+      setLoading(true);
+
+      const result = await searchServices.search(debounced);
+
+      console.log(result);
+      setSearchResult(result);
+      setLoading(false);
+    };
+
+    fetchApi();
   }, [debounced]);
 
   const handleHideResult = () => {
     setShowResult(false);
+  };
+
+  // Handle input
+  const handleChange = (e) => {
+    const searchValue = e.target.value;
+
+    if (!searchValue.startsWith(' ')) {
+      setSearchValue(searchValue);
+    }
   };
 
   return (
@@ -70,7 +86,7 @@ function Search() {
           spellCheck={false}
           ref={inputRef}
           value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
+          onChange={handleChange}
           onFocus={() => setShowResult(true)}
         />
         {!!searchValue && !loading && (
@@ -87,7 +103,7 @@ function Search() {
 
         {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
 
-        <button className={cx('search-btn')}>
+        <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
           <SearchIcon />
         </button>
       </div>
