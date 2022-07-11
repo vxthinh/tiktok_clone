@@ -9,6 +9,13 @@
 
 .menu-popper {
   padding-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+//Menu body
+.menu-body {
+  overflow-y: overlay;
 }
 
 // Menu items
@@ -31,6 +38,7 @@
 
 .header {
   position: relative;
+  flex-shrink: 0;
   height: 50px;
   margin-top: -8px;
 }
@@ -48,3 +56,5 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+//

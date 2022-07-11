@@ -115,7 +115,7 @@ function Header() {
                   <UploadIcon />
                 </button>
               </Tippy>
-              <Tippy elay={[0, 200]} content="Message" placement="bottom">
+              <Tippy delay={[0, 200]} content="Message" placement="bottom">
                 <button className={cx('action-btn')}>
                   <MessageIcon />
                 </button>
