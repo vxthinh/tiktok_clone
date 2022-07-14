@@ -1,7 +1,7 @@
-import routesConfig from '~/config/routes';
+import config from '~/config';
 
 //Layouts
-import { HeaderOnly, DefaultLayout } from '~/components/Layout';
+import { HeaderOnly, DefaultLayout } from '~/layouts';
 
 //Pages
 import Home from '~/pages/Home';
@@ -12,11 +12,11 @@ import Search from '~/pages/Search';
 
 //Public routes
 const publicRoutes = [
-  { path: routesConfig.home, component: Home, layout: DefaultLayout },
-  { path: routesConfig.following, component: Following, layout: DefaultLayout },
-  { path: routesConfig.profile, component: Profile, layout: DefaultLayout },
-  { path: routesConfig.upload, component: Upload, layout: HeaderOnly },
-  { path: routesConfig.search, component: Search, layout: null },
+  { path: config.routes.home, component: Home, layout: DefaultLayout },
+  { path: config.routes.following, component: Following, layout: DefaultLayout },
+  { path: config.routes.profile, component: Profile, layout: DefaultLayout },
+  { path: config.routes.upload, component: Upload, layout: HeaderOnly },
+  { path: config.routes.search, component: Search },
 ];
 
 const privateRoutes = [];
