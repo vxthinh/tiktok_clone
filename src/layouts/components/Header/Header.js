@@ -59,7 +59,7 @@ const MENU_ITEMS = [
 ];
 
 function Header() {
-  const currentUser = false;
+  const currentUser = true;
 
   // Handle logic
   const handleMenuChange = (menuItem) => {
@@ -76,7 +76,7 @@ function Header() {
     {
       icon: <FontAwesomeIcon icon={faUser} />,
       title: 'View profile',
-      to: '/@hoaa',
+      to: '/@vxthinh',
     },
     {
       icon: <FontAwesomeIcon icon={faCoins} />,
